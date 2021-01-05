@@ -40,22 +40,22 @@ end
 % val = o-w-q;
 
 %Transport:
-transp_ppp = psi0_ppp(s1+t1,s2+t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
-transp_pmp = psi0_pmp(s1+t1,s2-t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
+transp_ppp = psi0_ppp(s1+t1,s2+t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3); %checked
+transp_pmp = psi0_pmp(s1+t1,s2-t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3); %checked
 
-transp_ppm = exp(1i .* phi)*psi0_mpp(s3-t3,s2+t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
-transp_pmm = exp(1i .* phi)*psi0_mmp(s3-t3,s2-t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
+transp_ppm = exp(1i .* phi)*psi0_mpp(s3-t3,s2+t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3); %checked
+transp_pmm = exp(1i .* phi)*psi0_mmp(s3-t3,s2-t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3); %checked
 
 %Integral 1
-int1_ppp = -1*1i*omega/2*integral(@(tau) psi0_ppm(s1+t1,s2+t2,tau,theta1,theta2,theta3,alpha1,alpha2,alpha3),s1+t1,s3+t3);
-int1_pmp = -1*1i*omega/2*integral(@(tau) psi0_pmm(s1+t1,s2-t2,tau,theta1,theta2,theta3,alpha1,alpha2,alpha3),s1+t1,s3+t3);
+int1_ppp = -1*1i*omega/2*integral(@(tau) psi0_ppm(s1+t1,s2+t2,tau,theta1,theta2,theta3,alpha1,alpha2,alpha3),s1+t1,s3+t3); %checked
+int1_pmp = -1*1i*omega/2*integral(@(tau) psi0_pmm(s1+t1,s2-t2,tau,theta1,theta2,theta3,alpha1,alpha2,alpha3),s1+t1,s3+t3); %checked
 
-int1_ppm = -1*1i*omega/2*integral(@(sigma) exp(1i .* phi).*psi0_mmp(s3-t3,(sigma),s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s2+t2);
-int1_pmm = -1*1i*omega/2*integral(@(sigma) exp(1i .* phi).*psi0_mpp(s3-t3,(sigma),s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s2+t2);
+int1_ppm = -1*1i*omega/2*integral(@(sigma) exp(1i .* phi).*psi0_mmp(s3-t3,(sigma),s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s2+t2); %checked
+int1_pmm = -1*1i*omega/2*integral(@(sigma) exp(1i .* phi).*psi0_mpp(s3-t3,(sigma),s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s2+t2); %checked
 
 %Integral 2
-int2_ppp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mpp(s3+t3-2*sigma,s2+t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3);
-int2_pmp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mmp(s3+t3-2*sigma,s2-t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3);
+int2_ppp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mpp(s3+t3-2*sigma,s2+t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3); 
+int2_pmp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mmp(s3+t3-2*sigma,s2-t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3);
  
 int2_ppm = -1*1i*omega/2*integral(@(tau) exp(1i * phi)*psi0_mpm(s3-t3,s2+t2,(tau),theta1,theta2,theta3,alpha1,alpha2,alpha3),s3-t3,s1+t1);
 int2_pmm = -1*1i*omega/2*integral(@(tau) exp(1i * phi)*psi0_mmm(s3-t3,s2-t2,(tau),theta1,theta2,theta3,alpha1,alpha2,alpha3),s3-t3,s1+t1);
