@@ -54,8 +54,8 @@ end
 % val = o-w-q;
 
 %Transport:
-transp_ppp = psi0_ppp(s1+t1,s2+t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
-transp_pmp = psi0_pmp(s1+t1,s2-t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
+transp_ppp = psi0_ppp(s1+t1,s2+t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3);
+transp_pmp = psi0_pmp(s1+t1,s2-t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3);
 
 transp_ppm = exp(1i .* phi)*psi0_mpp(s3-t3,s2+t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
 transp_pmm = exp(1i .* phi)*psi0_mmp(s3-t3,s2-t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3);
@@ -74,14 +74,14 @@ int1_ppm = -1*1i*omega/2.*exp(1i .* phi).*(mmpterm.*(gaussian(s3-t3,alpha1,mup))
 int1_pmm = -1*1i*omega/2.*exp(1i .* phi).*(mmpterm.*(gaussian(s3-t3,alpha1,mup)).*(gaussint(s2-t2,s2+t2,alpha2,mue1)).*(gaussian(s1+t1,alpha3,mue2)));
 
 %Integral 2
-%int2_ppp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mpp(s3+t3-2*sigma,s2+t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3);
-%int2_pmp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mmp(s3+t3-2*sigma,s2-t2,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3);
+%int2_ppp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mpp(s3+t3-2*sigma,s2+t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3);
+%int2_pmp = -1*1i*omega*integral(@(sigma) exp(1i * phi)*psi0_mmp(s3+t3-2*sigma,s2-t2,s1+t1,theta1,theta2,theta3,alpha1,alpha2,alpha3),(1/2)*(s3+t3-s1-t1),t3);
  
 %WARNING: THESE WERE SOLVED USING A CHANGE OF VARIABLES, WHICH REQUIRED ME
 %TO MAKE ANOTHER FUNCTION
 
-int2_ppp = -1*1i*omega.*exp(1i * phi).*(mppterm.*annoygaussint2(s1,t1,s3,t3,alpha1,mup).*(gaussian(s2+t2,alpha2,mue1)).*(gaussian(s3+t3,alpha3,mue2)));
-int2_pmp = -1*1i*omega.*exp(1i * phi).*(mmpterm.*annoygaussint2(s1,t1,s3,t3,alpha1,mup).*(gaussian(s2-t2,alpha2,mue1)).*(gaussian(s3+t3,alpha3,mue2)));
+int2_ppp = -1*1i*omega.*exp(1i * phi).*(mppterm.*annoygaussint2(s1,t1,s3,t3,alpha1,mup).*(gaussian(s2+t2,alpha2,mue1)).*(gaussian(s1+t1,alpha3,mue2)));
+int2_pmp = -1*1i*omega.*exp(1i * phi).*(mmpterm.*annoygaussint2(s1,t1,s3,t3,alpha1,mup).*(gaussian(s2-t2,alpha2,mue1)).*(gaussian(s1+t1,alpha3,mue2)));
 
 %int2_ppm = -1*1i*omega/2*integral(@(tau) exp(1i * phi)*psi0_mpm(s3-t3,s2+t2,(tau),theta1,theta2,theta3,alpha1,alpha2,alpha3),s3-t3,s1+t1);
 %int2_pmm = -1*1i*omega/2*integral(@(tau) exp(1i * phi)*psi0_mmm(s3-t3,s2-t2,(tau),theta1,theta2,theta3,alpha1,alpha2,alpha3),s3-t3,s1+t1);
