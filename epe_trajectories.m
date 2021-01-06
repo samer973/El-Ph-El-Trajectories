@@ -1,8 +1,9 @@
-for i=1:100
-    %theta1=unifrnd(pi/8,pi/4);
-%theta2=unifrnd(0,pi/4);
-%theta3=unifrnd(pi/4,pi/(2.5));
-    ffpsi = @(t,q) psiArbiterv2(q(1),q(2),q(3),t,t,t,.005,0.01,0.01,0.5,0,pi*0.15,pi*0.45,pi.*(1/2.*i.*1/100));
+for i=1:1
+    theta1=unifrnd(0,pi/2);
+theta2=unifrnd(0,pi/2);
+theta3=unifrnd(0,pi/(2));
+    ffpsi = @(t,q) psiArbiterv2(q(1),q(2),q(3),t,t,t,.005,0.01,0.01,0.5,0.050144,0.56057,1.0409,pi.*(1/2.*i.*1/100));
+    %ffpsi = @(t,q) psiArbiterv2(q(1),q(2),q(3),t,t,t,.005,0.01,0.01,0.5,theta1,theta2,theta3,pi.*(1/6));
 % first three angles are mixing, last one is the interaction
 % minus corresponds to cosine and plus corresponds to sine
 % so if you want it moving to the right, maximize minus so small theta
@@ -55,9 +56,9 @@ v100 = @(t,q) sntrajcut(t,q).*j100(t,q)/rho(t,q);
 v010 = @(t,q) sntrajcut(t,q).*j010(t,q)/rho(t,q);
 v001 = @(t,q) sntrajcut(t,q).*j001(t,q)/rho(t,q);
 tspan = [0 1];
-q10 =0+sqrt(0.005)*randn(1);
-q20 = -1.5 +(0.1)*randn(1);
-q30 = 0.5+(0.1)*randn(1);
+%q10 =0+sqrt(0.005)*randn(1);
+%q20 = -1.5 +(0.1)*randn(1);
+%q30 = 0.5+(0.1)*randn(1);
 %q10 =-0.0737;
 %q20 = -1.527;
 %q30 = 0.45169;

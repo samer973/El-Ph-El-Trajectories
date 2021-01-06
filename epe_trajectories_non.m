@@ -1,5 +1,6 @@
 for i=1:1
-ffpsi = @(t,q) psiArbiternon(q(1),q(2),q(3),t,t,t,.005,0.01,0.01,0.5,0,pi*0.15,pi*0.45,pi.*(1/6));
+%ffpsi = @(t,q) psiArbiternon(q(1),q(2),q(3),t,t,t,.005,0.01,0.01,0.5,0,pi*0.15,pi*0.45,pi.*(1/6));
+ffpsi = @(t,q) psiArbiternon(q(1),q(2),q(3),t,t,t,.005,0.01,0.01,4,0.6085,0.3811,1.205,pi.*(1/6));
 % first three angles are mixing, last one is the interaction
 % minus corresponds to cosine and plus corresponds to sine
 % so if you want it moving to the right, maximize minus so small theta

@@ -17,7 +17,7 @@ mue2=0.5;
 psi0_gauss = @(s1,s2,s3, alpha1,alpha2,alpha3) ((1/(2*pi.*alpha1)).^(1/4)).*exp(-((s1+0).^2)/(4.*alpha1)) ...
             .* ((1/(2*pi.*alpha2)).^(1/4))*exp(-((s2+1.5).^2)/(4.*alpha2))  ...
             .* ((1/(2*pi.*alpha3)).^(1/4)).*exp(-((s3-.5).^2)/(4.*alpha3));
-psi0_gauss=@(s1,s2,s3, alpha1,alpha2,alpha3) (gaussian(s1,alpha1,mup)).*(gaussian(s2,alpha2,mue1)).*(gaussian(s3,alpha3,mue2));
+%psi0_gauss=@(s1,s2,s3, alpha1,alpha2,alpha3) (gaussian(s1,alpha1,mup)).*(gaussian(s2,alpha2,mue1)).*(gaussian(s3,alpha3,mue2));
 
 pppterm=sin(theta1).*sin(theta2).*sin(theta3);
 ppmterm=sin(theta1).*sin(theta2).*cos(theta3);
@@ -71,8 +71,8 @@ int1_mpm = -1*1i*omega/2.*exp(1i .* phi).*(pmpterm.*(gaussian(s2+t2,alpha1,mup))
 %int1_mmp = -1*1i*omega/2*integral(@(sigma) psi0_mpp(s1-t1,(sigma),s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s1-t1);
 %int1_mmm = -1*1i*omega/2*integral(@(sigma) psi0_mpm(s1-t1,(sigma),s3-t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s1-t1);
 
-int1_mmp = -1*1i*omega/2.*exp(1i .* phi).*(mppterm.*(gaussian(s1-t1,alpha1,mup)).*(gaussint(s2-t2,s1-t1,alpha2,mue1)).*(gaussian(s3+t3,alpha3,mue2)));
-int1_mmm = -1*1i*omega/2.*exp(1i .* phi).*(mpmterm.*(gaussian(s1-t1,alpha1,mup)).*(gaussint(s2-t2,s1-t1,alpha2,mue1)).*(gaussian(s3-t3,alpha3,mue2)));
+int1_mmp = -1*1i*omega/2.*(mppterm.*(gaussian(s1-t1,alpha1,mup)).*(gaussint(s2-t2,s1-t1,alpha2,mue1)).*(gaussian(s3+t3,alpha3,mue2)));
+int1_mmm = -1*1i*omega/2.*(mpmterm.*(gaussian(s1-t1,alpha1,mup)).*(gaussint(s2-t2,s1-t1,alpha2,mue1)).*(gaussian(s3-t3,alpha3,mue2)));
 
 %Integral 2
 %int2_mpp = -1*1i*omega/2*integral(@(sigma) exp(1i * phi)*psi0_ppp(s2+t2,sigma,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),s1-t2,s2+t2);
@@ -90,8 +90,8 @@ int2_mmp = -1*1i*omega.*exp(1i * phi).*(pmpterm.*(annoygaussint1(s1,t1,s2,t2,alp
 int2_mmm = -1*1i*omega.*exp(1i * phi).*(pmmterm.*(annoygaussint1(s1,t1,s2,t2,alpha1,mup)).*(gaussian(s1-t1,alpha2,mue1)).*(gaussian(s3-t3,alpha3,mue2)));
 
 %Int 3
-%int3_mpp = -1*1i*omega/2*integral(@(sigma) psi0_mmp(s1-t1,sigma,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),s1-t1,s2-t2);
-%int3_mpm = -1*1i*omega/2*integral(@(sigma) psi0_mmm(s1-t1,sigma,t3-t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),s1-t1,s2-t2);
+%int3_mpp = -1*1i*omega/2*integral(@(sigma) psi0_mmp(s1-t1,sigma,s3+t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s1-t1);
+%int3_mpm = -1*1i*omega/2*integral(@(sigma) psi0_mmm(s1-t1,sigma,t3-t3,theta1,theta2,theta3,alpha1,alpha2,alpha3),s2-t2,s1-t1);
 
 int3_mpp = -1*1i*omega/2.*(mmpterm.*(gaussian(s1-t1,alpha1,mup)).*(gaussint(s2-t2,s1-t1,alpha2,mue1)).*(gaussian(s3+t3,alpha3,mue2)));
 int3_mpm = -1*1i*omega/2.*(mmmterm.*(gaussian(s1-t1,alpha1,mup)).*(gaussint(s2-t2,s1-t1,alpha2,mue1)).*(gaussian(s3-t3,alpha3,mue2)));
